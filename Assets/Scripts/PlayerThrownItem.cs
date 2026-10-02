@@ -30,14 +30,20 @@ public class PlayerThrownItem : NetworkBehaviour
 
     public void RequestThrow()
     {
-        if (!IsOwner) return;
+        if (!IsOwner) 
+        {
+            return;
+        }
 
         ThrowAxeRpc();
     }
 
     public void RequestRecall()
     {
-        if (!IsOwner) return;
+        if (!IsOwner) 
+        {
+            return;
+        }
 
         RecallAxeRpc();
     }
@@ -45,8 +51,14 @@ public class PlayerThrownItem : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void ThrowAxeRpc()
     {
-        if (_isAway) return;
-        if (_heldItem.ObjectType != ObjectType.Axe) return;
+        if (_isAway)
+        {
+            return;
+        }
+        if (_heldItem.ObjectType != ObjectType.Axe) 
+        {
+            return;
+        }
 
         Vector3 direction = transform.forward;
         direction.y = 0f;
@@ -67,9 +79,18 @@ public class PlayerThrownItem : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void RecallAxeRpc()
     {
-        if (!_isAway) return;
-        if (_isReturning) return;
-        if (_thrownAxe == null) return;
+        if (!_isAway) 
+        {
+            return;
+        }
+        if (_isReturning)
+        {
+            return;
+        }
+        if (_thrownAxe == null)
+        {
+            return;
+        }
 
         StartCoroutine(ReturnAxe());
     }
@@ -115,7 +136,10 @@ public class PlayerThrownItem : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void PlayCatchSoundRpc()
     {
-        if (_audioSource == null || _catchSound == null) return;
+        if (_audioSource == null || _catchSound == null) 
+        {
+            return;
+        }
 
         _audioSource.PlayOneShot(_catchSound);
     }
